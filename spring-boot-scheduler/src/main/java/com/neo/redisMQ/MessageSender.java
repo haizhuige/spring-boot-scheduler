@@ -1,4 +1,4 @@
-package com.neo.cache;
+package com.neo.redisMQ;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;

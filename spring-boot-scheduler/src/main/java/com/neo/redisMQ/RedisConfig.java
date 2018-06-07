@@ -1,4 +1,4 @@
-package com.neo.cache;
+package com.neo.redisMQ;
 
 import java.util.ArrayList;
 import java.util.List;
