@@ -1,0 +1,45 @@
+spring: 
+  datasource:
+      url: jdbc:mysql://localhost:3308/ctx?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+      username: root
+      password: root
+      driverClassName: com.mysql.jdbc.Driver
+      maxActive: 150 #连接池处于活动状态的数据库连接的最大数目，0表示不限制,表示最大并发
+      initialSize: 10 #初始化连接数
+      maxIdle: 50 #连接池处于空闲状态的数据库连接的最大数目，取非正整数表示不受限制，超过此数值时多余的空闲连接将会被释放
+      minIdle: 10 #连接池处于空闲状态的数据库连接的最小数目，低于此数值将会创建所欠缺的连接，设0无限制
+      #testOnBorrow: true #指定连接被调用时是否经过校验，如果校验未通过，则该连接被连接池断掉，并由连接池尝试调用另一个连接,值为true,则validationQuery参数必须为一个非空字串
+      validationInterval: 30000 #检查连接死活的时间间隔，单位：毫秒
+      #validationQuery: SELECT 1 #在连接返回给调用者前用于校验连接是否有效的SQL语句，如果指定了SQL语句，则必须为一个SELECT语句，且至少有一行结果
+      type: com.alibaba.druid.pool.DruidDataSource
+      maxWait: 60000 # 配置获取连接等待超时的时间
+      timeBetweenEvictionRunsMillis: 60000 # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      minEvictableIdleTimeMillis: 300000 # 配置一个连接在池中最小生存的时间，单位是毫秒
+      validationQuery: SELECT 1 FROM DUAL
+      testOnBorrow: false
+      testWhileIdle: true
+      testOnReturn: false
+      poolPreparedStatements: true # 打开PSCache，并且指定每个连接上PSCache的大小
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall,log4j # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      useGlobalDataSourceStat: true # 合并多个DruidDataSource的监控数据
+  application: 
+    name: spring-boot-scheduler
+  redis:
+    timeout: 1000
+    pool:
+      max-active: 10
+      max-idle: 10
+      max-wait: 1000
+      min-idle: 1
+    cluster:
+      max-redirects: 3
+      nodes: 172.29.150.1:6400,172.29.150.2:6395,172.29.150.1:6401,172.29.150.2:6396,172.29.150.3:40019,172.29.150.3:40020
+server:
+  port: 8808
+cron: 
+   ex: 0 0/2 * * * ?
+mybatis:
+  type-aliases-package: com.neo.dao
+  mapperLocations: classpath:mapper/*.xml
