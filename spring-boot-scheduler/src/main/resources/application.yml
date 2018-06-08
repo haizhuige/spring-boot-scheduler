@@ -33,9 +33,9 @@ spring:
       max-idle: 10
       max-wait: 1000
       min-idle: 1
-    cluster:
-      max-redirects: 3
-      nodes: 172.29.150.1:6400,172.29.150.2:6395,172.29.150.1:6401,172.29.150.2:6396,172.29.150.3:40019,172.29.150.3:40020
+    database: 0
+    host: 127.0.0.1
+    port: 6379
 server:
   port: 8808
 cron: 

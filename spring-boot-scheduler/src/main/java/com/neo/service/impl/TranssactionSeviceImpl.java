@@ -27,8 +27,9 @@ public class TranssactionSeviceImpl implements TranssactionSevice {
 	@Override
 	public void updateScheduleInfo(SysSchedule schedule) {
 		sysScheduleMapper.updateByPrimaryKeySelective(schedule);
-	//	transsactionSevice.errorMethod();
-		stringRedisTemplate.convertAndSend(TopicEnum.UPDATE_SCHEDULE_FLAG_TOPIC.getState(),"修改定时任务标识符状态");
+	    //transsactionSevice.errorMethod();
+		stringRedisTemplate.convertAndSend(TopicEnum.UPDATE_SCHEDULE_FLAG_TOPIC.getState(), "topic1");
+
 	 	
 	}
 	@Override
