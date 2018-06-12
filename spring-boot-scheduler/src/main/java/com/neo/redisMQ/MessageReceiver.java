@@ -13,15 +13,16 @@ import com.neo.util.FunctionIdNum;
 public class MessageReceiver{
 	 @Autowired
 	 SysOperatorLogMapper logMapper;
-	 /**接收消息的方法*/
+	/**接收消息的方法*/
     public void receiveMessage(String message){
-    	SysOperatorLog log=new SysOperatorLog();
-    	log.setFunctionId(FunctionIdNum.UPDATE_SCHEDULE_FLAG.getState());
-    	log.setContent("修改定时任务标识");
-    	log.setCreatedBy("admin");
-    	log.setCreatedTime(new Date());
-        logMapper.insert(log);
-        System.out.println("方法一收到一条消息："+message);
+    		SysOperatorLog log=new SysOperatorLog();
+        	log.setFunctionId(FunctionIdNum.UPDATE_SCHEDULE_FLAG.getState());
+        	log.setContent("修改定时任务标识");
+        	log.setCreatedBy("admin");
+        	log.setCreatedTime(new Date());
+            logMapper.insert(log);
+            System.out.println("方法一收到一条消息："+message);
+    	
     }
     /**接收消息的方法*/
     public void receiveMessage2(String message){
@@ -32,5 +33,5 @@ public class MessageReceiver{
     	log.setCreatedTime(new Date());
         logMapper.insert(log);
         System.out.println("方法二收到一条消息："+message);
-    }
+      }
 }

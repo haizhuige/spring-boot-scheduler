@@ -2,6 +2,7 @@ package com.neo.redisMQ;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +27,7 @@ public class RedisConfig {
     	container.setConnectionFactory(connectionFactory);
     	List<PatternTopic> list=new ArrayList<PatternTopic>();
     	list.add(new PatternTopic(TopicEnum.UPDATE_SCHEDULE_FLAG_TOPIC.getState()));
-    	container.addMessageListener(listenerAdapter, new PatternTopic(TopicEnum.UPDATE_SCHEDULE_FLAG_TOPIC.getState()));
+    	container.addMessageListener(listenerAdapter, new PatternTopic("liu"));
     	container.addMessageListener(listenerAdapter2, new PatternTopic(TopicEnum.UPDATE_SCHEDULE_FLAG_TOPIC.getState()));
     	return container;
 	}
@@ -45,4 +46,13 @@ public class RedisConfig {
     StringRedisTemplate template(RedisConnectionFactory connectionFactory) {
         return new StringRedisTemplate(connectionFactory);
     }
+    /*@Bean
+    MessageReceiver receiver(CountDownLatch latch) {
+        return new MessageReceiver(latch);
+    }
+    @Bean
+    CountDownLatch latch() {
+        return new CountDownLatch(1);
+    }*/
+
 }
